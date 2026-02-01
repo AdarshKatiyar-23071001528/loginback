@@ -4,10 +4,10 @@ export const register = async (req,res) => {
     const {name,password,email} = req.body;
     try{
         let user = await User.findOne({email});
-        if(user) return res.json({message:"User already registerd please login",success:false});
+        if(user) return res.json({message:"Already registerd please login",success:false});
         const hashPass = await bcrypt.hash(password,10);
         user = await User.create({name,password:hashPass,email});
-        res.json({message:"User Create Successfully",success:true,user});
+        res.json({message:"Register Successfully",success:true,user});
     }catch(err){
         res.json({message:err.message,success:false});
     }
